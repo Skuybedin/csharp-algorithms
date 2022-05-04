@@ -1,4 +1,4 @@
-public static int JumpSearch(int[] array, int x)
+    public static int JumpSearch(int[] array, int x)
     {
         int B = (int) Math.Sqrt(array.Length); // вычисляем размер блока(прыжка)
         int start = 0; // начальная позиция блока
