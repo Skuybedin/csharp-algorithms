@@ -1,40 +1,35 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Show
 {
-	public class UsersStorage : IEnumerable<User>
-	{
-		private readonly User[] users;
-		public UsersStorage(User[] users)
-		{
-			this.users = users;
-		}
-		IEnumerator<User> IEnumerable<User>.GetEnumerator() => new UsersStorageEnumerator(users); // Реализация для IEnumerable<T>
-		IEnumerator IEnumerable.GetEnumerator() => new UsersStorageEnumerator(users); // Реализация для IEnumerable
-	}
-
-	public class UsersStorageEnumerator : IEnumerator<User>
+	public class UsersStorageEnumeratorBase : IEnumerator
 	{
 		private readonly User[] users;
 		private int currentIndex = -1;
-		public UsersStorageEnumerator(User[] users)
+		public UsersStorageEnumeratorBase(User[] users)
 		{
 			this.users = users;
 		}
-		public User Current => users[currentIndex]; // Реализация классового Current
-		object IEnumerator.Current => users[currentIndex]; // Реализация интерфейсного Current
+		public object Current => users[currentIndex]; // Возвращает текуещее (после MoveNext) значение массива по индексу
 		public bool MoveNext()
 		{
 			currentIndex++;
-			if (currentIndex >= users.Length) return false;
+			if (currentIndex >= users.Length) return false; // Проверка на выход за границу массива
 			return true;
 		}
-		public void Reset() => currentIndex = -1;
-		public void Dispose() {} // Нужен для освобождения занятых ресурсов
+		public void Reset() => currentIndex = -1; // Сбросить индекс до начального параметра -1
+	}
+	public class UsersStorageBase : IEnumerable
+	{
+		private readonly User[] users;
+		public UsersStorageBase(User[] users)
+		{
+			this.users = users;
+		}
+		public IEnumerator GetEnumerator() => new UsersStorageEnumeratorBase(users); // Достаем перечислитель
 	}
 }
