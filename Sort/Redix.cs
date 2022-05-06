@@ -31,7 +31,7 @@ static void RadixSort(int[] array)
 }
 
 
-
+// Невозрастание
 static void RadixSort(int[] array)
 {
 	int digitCounts = 10; // количество различных цифр 
