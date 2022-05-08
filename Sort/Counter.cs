@@ -9,7 +9,7 @@ static void CounterSort()
 		counts[x] = counts[x] + 1; // подсчитываем
 	}
 
-	for (int i = 0; i < k; i++)
+	for (int i = 0; i < counts.Length; i++)
 	{
 		for (int j = 0; j < counts[i]; j++) // counts[i]-количество чисел i
 		{
@@ -31,7 +31,7 @@ static void CounterSort()
 		counts[x] = counts[x] + 1; // подсчитываем
 	}
 
-	for (int i = k - 1; i >= 0; i--)
+	for (int i = counts.Length - 1; i >= 0; i--)
 	{
 		for (int j = 0; j < counts[i]; j++) // counts[i]-количество чисел i
 		{
